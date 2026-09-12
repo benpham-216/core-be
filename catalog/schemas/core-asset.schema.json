@@ -1,0 +1,15 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Core backend asset
+type: object
+required: [schema_version, id, name, kind, stack, version, status, owner, description]
+properties:
+  schema_version: { type: string }
+  id: { type: string, pattern: "^core-be-[a-z0-9-]+$" }
+  name: { type: string }
+  kind: { enum: [library, api-template, worker, tool, skill, infra-module] }
+  stack: { enum: [go, dotnet, node, python, java, other] }
+  version: { type: string }
+  status: { enum: [draft, review, published, deprecated] }
+  owner: { type: string }
+  description: { type: string }
+additionalProperties: true

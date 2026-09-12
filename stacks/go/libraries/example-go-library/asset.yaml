@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: "core-be-go-library-example-001"
+name: "example-go-library"
+kind: "library"
+stack: "go"
+version: "0.1.0"
+status: "draft"
+owner: "platform"
+description: "Example manifest; copy it for a reusable backend asset."
+entrypoints: []
+contracts: []
