@@ -23,7 +23,7 @@ func (s *Service) Transition(ctx context.Context, id string, expectedVersion int
 	w, err := s.Get(ctx,id); if err != nil { return nil,err }
 	if w.Version != expectedVersion { return nil,eventstore.ErrConcurrency }
 	from:=w.Status; if err:=w.MoveTo(next,actor); err != nil{return nil,err}
-	e:=s.event(id,"work_order.transitioned",actor,correlationID,map[string]any{"from":from,"to":next})
+	e:=s.event(id,"work_order.transitioned",actor,correlationID,map[string]any{"from":string(from),"to":string(next)})
 	if err:=s.store.Append(ctx,id,expectedVersion,e);err!=nil{return nil,err}
 	w.Version++; return w,nil
 }
