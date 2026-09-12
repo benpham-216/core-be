@@ -1,0 +1,24 @@
+openapi: 3.1.0
+info:
+  title: Agentic Flow Studio Control Plane API
+  version: 0.1.0
+paths:
+  /v1/work-orders:
+    post:
+      summary: Create a work order in draft
+      responses: { '201': { description: Created } }
+  /v1/work-orders/{id}:
+    get:
+      summary: Get the current read model
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses: { '200': { description: Work order } }
+  /v1/work-orders/{id}/events:
+    get:
+      summary: Get append-only event history
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses: { '200': { description: Event history } }
+  /v1/work-orders/{id}/commands/transition:
+    post:
+      summary: Request a guarded lifecycle transition
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses: { '200': { description: Transitioned work order }, '409': { description: Stale version or policy conflict } }
